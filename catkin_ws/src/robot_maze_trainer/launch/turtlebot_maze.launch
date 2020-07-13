@@ -1,0 +1,4 @@
+<launch>
+    <node pkg = "robot_maze_trainer" type = "turtlebot_maze" name = "turtle_bot_maze_node" output = "screen">
+	</node>
+</launch>
