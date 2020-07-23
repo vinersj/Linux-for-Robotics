@@ -15,24 +15,24 @@ void counterCallback(const sensor_msgs::LaserScan::ConstPtr &msg) {
   // If the distance to an obstacle in front of the robot is bigger than 1
   // meter, the robot will move forward linearly
   if (msg->ranges[360] > 1) {
-    linX = 0.3;
+    linX = 0.25;
+    angZ = 0.0;
+  }
+
+  if (msg->ranges[719] > 2 && msg->ranges[0] > 2) {
+    linX = 0;
     angZ = 0.0;
   }
   // If the distance to an obstacle in front of the robot is smaller than 1
   // meter, the robot will turn left
   if (msg->ranges[360] < 1) {
-      if (msg->ranges[719] < 1){
-          linX = 0.0;
-          angZ = -2.7;
-      }
-      else if (msg->ranges[0]) {
-          linX = 0.0;
-          angZ = 2.7;
-      }
-      else {
+    if (msg->ranges[719] < 1) {
       linX = 0.0;
-      angZ = 2.7;
-      }
+      angZ = -1.45;
+    } else if (msg->ranges[0] < 1) {
+      linX = 0.0;
+      angZ = 1.45;
+    }
   }
 }
 
@@ -53,7 +53,7 @@ int main(int argc, char **argv) { // We start the main C++ program
       "cmd_vel", 1000); // Create a publisher object
   geometry_msgs::Twist move;
 
-  ros::Rate rate(2); // Create a rate object of 2Hz frequency
+  ros::Rate rate(1); // Create a rate object of 2Hz frequency
 
   while (ros::ok()) {
 
