@@ -13,7 +13,7 @@ void counterCallback(const sensor_msgs::LaserScan::ConstPtr &msg) {
                                     // and LaserScan
 
   // If the distance to an obstacle in front of the robot is bigger than 1
-  // meter, the robot will move forward linearly
+  // unit, the robot will move forward linearly
   if (msg->ranges[360] > 1) {
     linX = 0.25;
     angZ = 0.0;
@@ -44,7 +44,7 @@ int main(int argc, char **argv) { // We start the main C++ program
 
   ros::init(
       argc, argv,
-      "turtlebot_maze_node"); // We initiate a ROS node called topic_publisher
+      "turtlebot_maze_node"); // We initiate a ROS node called turtlebot_maze_node
   ros::NodeHandle nh; // We create a handler for the node. This handler will
                       // actually do the initialization of the node.
 
